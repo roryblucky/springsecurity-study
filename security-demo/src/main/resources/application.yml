@@ -6,6 +6,8 @@ spring:
     password: root
   session:
     store-type: none
-security:
-  basic:
-    enabled: false
+com:
+  rory:
+    security:
+      browser:
+        loginType: redirect

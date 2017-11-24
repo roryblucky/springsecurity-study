@@ -6,6 +6,8 @@ import com.rory.dto.UserQueryCondition;
 import com.rory.exception.UserNotExistException;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    @GetMapping("/me")
+    public Object getCurrentUser(Authentication authentication) {
+        //入参等同于SecurityContextHolder.getContext().getAuthentication()
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
 
     @PostMapping
     public User create(@Valid @RequestBody User user, BindingResult errors) {
